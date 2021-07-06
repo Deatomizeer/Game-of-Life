@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4586323646848435323}
   - component: {fileID: 6375609840282481605}
   - component: {fileID: -3549961546509281450}
+  - component: {fileID: -6368558547801321022}
   m_Layer: 0
   m_Name: GameCell
   m_TagString: Untagged
@@ -91,3 +92,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 114926268f512da4aa8cec875a37407d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: 373dd2e29bd669948b261fbaf17048d6, type: 2}
+  - {fileID: 2100000, guid: 8fd667d317132c54f854df430163f0ac, type: 2}
+--- !u!65 &-6368558547801321022
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5670122834021637934}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
