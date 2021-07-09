@@ -32,7 +32,7 @@ public class CellManager : MonoBehaviour
     }
 
     // Set the cell to be either alive or dead. `state` can be either 0 or 1.
-    public void setState(int state)
+    public void SetState(int state)
     {
         Debug.Assert(state == 0 || state == 1);
         alive = state;

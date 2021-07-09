@@ -24,6 +24,8 @@ public class GameManagerScript : MonoBehaviour
     }
     private GS gridSpread;
     public bool running;
+    // Determines how neighbors are counted at the edges.
+    public bool wrapAroundEdges;
     // Used to instantiate the objects.
     private GameObject[,] cubeGrid;
     // Used to set individual cells' states.
@@ -78,7 +80,7 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    // Update is called once per frame.
     void Update()
     {
         if (Input.GetKeyDown("space"))
@@ -86,7 +88,11 @@ public class GameManagerScript : MonoBehaviour
             running = !running;
             timer = 0f;
         }
-        if(running)
+        else if (Input.GetKeyDown("r") && !running)
+        {
+            ResetGrid();
+        }
+        if (running)
         {
             timer += Time.deltaTime;
             if (timer > frameDelay)
@@ -107,7 +113,14 @@ public class GameManagerScript : MonoBehaviour
         {
             for (int j = 0; j < gridWidth; j++)
             {
-                int count = CountAliveNeighbors(i, j);
+                int count;
+                if (wrapAroundEdges)
+                {
+                    count = CountAliveNeighborsWrapping(i, j);
+                } else
+                {
+                    count = CountAliveNeighbors(i, j);
+                }
                 int currentState = cellScriptGrid[i, j].alive;
                 nextGen[i, j] = DetermineCellState(count, currentState);
             }
@@ -160,6 +173,24 @@ public class GameManagerScript : MonoBehaviour
         }
         return count;
     }
+    // Count the living neighbors, but wrap the grid around if on the edge.
+    private int CountAliveNeighborsWrapping(int row, int col)
+    {
+        // Pre-emptively subtract self from the count.
+        int count = -cellScriptGrid[row,col].alive;
+        // Count each adjacent cell, including self.
+        for( int i=-1; i <= 1; i++ )
+        {
+            for( int j=-1; j<= 1; j++)
+            {
+                count += cellScriptGrid[
+                    (row + i + gridHeight) % gridHeight,
+                    (col + j + gridWidth) % gridWidth
+                ].alive;
+            }
+        }
+        return count;
+    }
     // Determine whether the given cell should live or die in the next generation.
     private int DetermineCellState(int aliveNeighbors, int currentState)
     {
@@ -181,7 +212,18 @@ public class GameManagerScript : MonoBehaviour
             for (int j = 0; j < gridWidth; j++)
             {
                 int state = nextGenInts[i, j];
-                cellScriptGrid[i, j].setState(state);
+                cellScriptGrid[i, j].SetState(state);
+            }
+        }
+    }
+    // Kill every cell on the grid.
+    public void ResetGrid()
+    {
+        for( int i=0; i < gridHeight; i++ )
+        {
+            for(int j = 0; j < gridWidth; j++)
+            {
+                cellScriptGrid[i, j].SetState(0);
             }
         }
     }
