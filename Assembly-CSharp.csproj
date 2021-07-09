@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CanvasManager.cs" />
     <Compile Include="Assets\Scripts\CellManager.cs" />
     <Compile Include="Assets\Scripts\CenterCamera.cs" />
     <Compile Include="Assets\Scripts\GameManagerScript.cs" />

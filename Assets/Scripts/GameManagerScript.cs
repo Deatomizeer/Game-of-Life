@@ -6,6 +6,8 @@ public class GameManagerScript : MonoBehaviour
 {
     // Cell object.
     public GameObject cubePrefab;
+    // Canvas to switch between the running/halted images.
+    public CanvasManager canvasManager;
     [Range(1, 20)]
     public int gridWidth;
     [Range(1, 20)]
@@ -48,6 +50,8 @@ public class GameManagerScript : MonoBehaviour
         CreateCellScriptGrid();
         // Adjust the camera.
         Camera.main.GetComponent<CenterCamera>().CenterOnGrid(gridSpread.x, gridSpread.y, gridWidth, gridHeight);
+        // Get the canvas reference.
+        canvasManager = GameObject.Find("Canvas").GetComponent<CanvasManager>();
     }
 
     private void InstantiateGrid(int width, int height)
@@ -87,6 +91,7 @@ public class GameManagerScript : MonoBehaviour
         {
             running = !running;
             timer = 0f;
+            canvasManager.SetRunningImage(running ? 1 : 0);
         }
         else if (Input.GetKeyDown("r") && !running)
         {
