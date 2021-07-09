@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CellManager.cs" />
+    <Compile Include="Assets\Scripts\CenterCamera.cs" />
     <Compile Include="Assets\Scripts\GameManagerScript.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Przemek/Documents/GitHub/Game of Life/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

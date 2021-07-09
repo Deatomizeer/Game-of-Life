@@ -44,6 +44,8 @@ public class GameManagerScript : MonoBehaviour
         cubeGrid = new GameObject[gridHeight, gridWidth];
         InstantiateGrid(gridWidth, gridHeight);
         CreateCellScriptGrid();
+        // Adjust the camera.
+        Camera.main.GetComponent<CenterCamera>().CenterOnGrid(gridSpread.x, gridSpread.y, gridWidth, gridHeight);
     }
 
     private void InstantiateGrid(int width, int height)
