@@ -12,8 +12,8 @@ public class CenterCamera : MonoBehaviour
         float yPos = .5f * gsy * (gridHeight - 1);
         Vector3 cameraPos = new Vector3(xPos, yPos, zPos);
         transform.position = cameraPos;
-        // Set the FOV to encompass the whole area.
-        GetComponent<Camera>().orthographicSize = (gridWidth > gridHeight ? gridWidth : gridHeight);
+        // Set the FOV to encompass the whole area (halve it because of how `ortographicSize` works).
+        GetComponent<Camera>().orthographicSize = (gridWidth > gridHeight ? gridWidth * gsx * .5f : gridHeight * gsy * .5f);
     }
 
 }

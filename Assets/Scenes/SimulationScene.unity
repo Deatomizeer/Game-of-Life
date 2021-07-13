@@ -441,7 +441,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.55891776, g: 0.63350797, b: 0.754717, a: 0}
+  m_BackGroundColor: {r: 0.5568628, g: 0.6313726, b: 0.75294125, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -598,12 +598,12 @@ MonoBehaviour:
   cubePrefab: {fileID: 5670122834021637934, guid: 9e99b1102c52dca48ad135822770da11,
     type: 3}
   canvasManager: {fileID: 0}
-  gridWidth: 12
-  gridHeight: 12
-  gridSpreadRatio: 2
-  frameDelay: 0.503
+  gridWidth: 16
+  gridHeight: 16
+  gridSpreadRatio: 1.5
+  frameDelay: 0.25
   running: 0
-  wrapAroundEdges: 0
+  wrapAroundEdges: 1
 --- !u!4 &1102314156
 Transform:
   m_ObjectHideFlags: 0

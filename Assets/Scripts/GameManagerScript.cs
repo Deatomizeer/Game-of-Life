@@ -12,9 +12,9 @@ public class GameManagerScript : MonoBehaviour
     public int gridWidth;
     [Range(1, 20)]
     public int gridHeight;
-    [Range(1, 4)] // Distance coefficient of the `gridSpread` struct.
-    public int gridSpreadRatio;
-    [Range(.3f, 1)] // Time per each generation in seconds.
+    [Range(1f, 2f)] // Distance coefficient of the `gridSpread` struct.
+    public float gridSpreadRatio;
+    [Range(.1f, 1)] // Time per each generation in seconds.
     public float frameDelay;
     // Time elapsed since last grid update.
     private float timer;
@@ -34,11 +34,16 @@ public class GameManagerScript : MonoBehaviour
     private CellManager[,] cellScriptGrid;
     // R reset
     // SPACE toggle run
-    // Left Click toggle individual cells
+    // LMB toggle individual cells
+    // ESC go back to settings or exit the game.
 
     // Start is called before the first frame update
     void Start()
     {
+        // Hide the cube object.
+        GameObject testCube = GameObject.Find("TestCube");
+        testCube.SetActive(false);
+        // Prepare the simulation variables.
         Vector3 cubePrefabSize = cubePrefab.GetComponent<MeshFilter>().sharedMesh.bounds.size;
         gridSpread.x = cubePrefabSize.x * gridSpreadRatio;
         gridSpread.y = cubePrefabSize.y * gridSpreadRatio;
