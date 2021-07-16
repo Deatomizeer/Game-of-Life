@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
+    // Where all data.
+    public DataHolderScript dhs;
     // Cell object.
     public GameObject cubePrefab;
     // Canvas to switch between the running/halted images.
@@ -40,6 +42,14 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Find the object with the required properties.
+        dhs = GameObject.Find("DataHolder").GetComponent<DataHolderScript>();
+        // Load user data into the simulation properties.
+        gridWidth = dhs.gridWidth;
+        gridHeight = dhs.gridHeight;
+        gridSpread.x = dhs.gridSpread;
+        gridSpread.y = dhs.gridSpread;
+        frameDelay = dhs.frameDelay;
         // Hide the cube object.
         GameObject testCube = GameObject.Find("TestCube");
         testCube.SetActive(false);
