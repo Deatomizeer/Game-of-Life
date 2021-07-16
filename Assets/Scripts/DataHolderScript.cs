@@ -7,6 +7,7 @@ public class DataHolderScript : MonoBehaviour
     public int gridHeight;
     public float gridSpread;
     public float frameDelay;
+    public bool wrapAroundEdges;
 
     // Start is called before the first frame update
     public void Start()
@@ -16,12 +17,13 @@ public class DataHolderScript : MonoBehaviour
     }
 
     // Save data to be restored later.
-    public void SaveData(int width, int height, float spread, float delay)
+    public void SaveData(int width, int height, float spread, float delay, bool wrap)
     {
         gridWidth = width;
         gridHeight = height;
         gridSpread = spread;
         frameDelay = delay;
+        wrapAroundEdges = wrap;
     }
 
 }

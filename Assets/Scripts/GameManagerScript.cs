@@ -50,6 +50,7 @@ public class GameManagerScript : MonoBehaviour
         gridSpread.x = dhs.gridSpread;
         gridSpread.y = dhs.gridSpread;
         frameDelay = dhs.frameDelay;
+        wrapAroundEdges = dhs.wrapAroundEdges;
         // Hide the cube object.
         GameObject testCube = GameObject.Find("TestCube");
         testCube.SetActive(false);
