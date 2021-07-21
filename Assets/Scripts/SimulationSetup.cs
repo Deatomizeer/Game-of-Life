@@ -21,6 +21,8 @@ public class SimulationSetup : MonoBehaviour
     public GameObject helpPanel;
     public Text helpText;
     public TextAsset helpFile;
+    // Exit panel.
+    public GameObject exitPanel;
     // A script needed to preserve the settings and create a proper grid in the new scene.
     public DataHolderScript dataHolder;
     // An enum for specific error messages.
@@ -53,6 +55,10 @@ public class SimulationSetup : MonoBehaviour
         helpPanel.SetActive(false);
         helpText.text = helpFile.text;
 
+        exitPanel = GameObject.Find("ConfirmExitPanel");
+        // Hide exit panel.
+        exitPanel.SetActive(false);
+
         dataHolder = GameObject.Find("DataHolder").GetComponent<DataHolderScript>();
 
         // Immediately update slider text to remove the placeholder '8's.
@@ -63,8 +69,8 @@ public class SimulationSetup : MonoBehaviour
     {
         if( Input.GetKeyDown("escape") )
         {
-            // Exit the game.
-            ExitGame();
+            // Act as if the "Exit" button was clicked.
+            ToggleExitPrompt();
         }
     }
     public void BeginSimulation()
@@ -116,6 +122,11 @@ public class SimulationSetup : MonoBehaviour
     public void ToggleHelpDisplay()
     {
         helpPanel.SetActive(!helpPanel.activeSelf);
+    }
+
+    public void ToggleExitPrompt()
+    {
+        exitPanel.SetActive(!exitPanel.activeSelf);
     }
 
     // Make sure the grid size is positive.
