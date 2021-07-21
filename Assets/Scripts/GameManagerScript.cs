@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -34,10 +35,6 @@ public class GameManagerScript : MonoBehaviour
     private GameObject[,] cubeGrid;
     // Used to set individual cells' states.
     private CellManager[,] cellScriptGrid;
-    // R reset
-    // SPACE toggle run
-    // LMB toggle individual cells
-    // ESC go back to settings or exit the game.
 
     // Start is called before the first frame update
     void Start()
@@ -105,14 +102,22 @@ public class GameManagerScript : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
+            // Toggle simulation running
             running = !running;
             timer = 0f;
             canvasManager.SetRunningImage(running ? 1 : 0);
         }
         else if (Input.GetKeyDown("r") && !running)
         {
+            // Reset the grid to the initial state.
             ResetGrid();
         }
+        else if (Input.GetKeyDown("escape"))
+        {
+            // Go to main menu.
+            SceneManager.LoadScene("MainMenuScene");
+        }
+
         if (running)
         {
             timer += Time.deltaTime;

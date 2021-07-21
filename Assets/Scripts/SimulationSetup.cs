@@ -45,43 +45,55 @@ public class SimulationSetup : MonoBehaviour
 
         dataHolder = GameObject.Find("DataHolder").GetComponent<DataHolderScript>();
 
-        // Immediately update slider text to remove the '8's.
+        // Immediately update slider text to remove the placeholder '8's.
         UpdateSliderTextSpread();
         UpdateSliderTextDelay();
     }
     public void BeginSimulation()
     {
         // Parse the received data.
-        int width = int.Parse(widthField.text);
-        int height = int.Parse(heightField.text);
+        int width;
+        bool widthOkay = int.TryParse(widthField.text, out width);
+        int height;
+        bool heightOkay = int.TryParse(heightField.text, out height);
         float spread = gridSpreadSlider.value;
         float delay = frameDelaySlider.value;
         bool wrap = wrapAroundEdges.isOn;
+
         // Validate the data.
-        ErrorCode e = DataIsValid(width, height);
-        if ( e == ErrorCode.NoError )
+        if( !(widthOkay && heightOkay) )
         {
-            // Save settings chosen by the user.
-            dataHolder.SaveData(width, height, spread, delay, wrap);
-            // Load the simulation scene.
-            SceneManager.LoadScene("SimulationScene");
+            errorText.gameObject.SetActive(true);
+            errorText.text = "An error occured while parsing grid size.";
         }
         else
         {
-            // Inform the user which data should be corrected.
-            errorText.gameObject.SetActive(true);
-            switch (e)
+            ErrorCode e = DataIsValid(width, height);
+            if (e == ErrorCode.NoError)
             {
-                case ErrorCode.SizeNotPositive:
-                    errorText.text = "Both width and height must be positive integers.";
-                    break;
-                case ErrorCode.SizeTooBig:
-                    errorText.text = string.Format("Grid size cannot be bigger than {0}.", maxGridSize);
-                    break;
-                default:
-                    break;
+                // Save settings chosen by the user.
+                dataHolder.SaveData(width, height, spread, delay, wrap);
+                // Load the simulation scene.
+                SceneManager.LoadScene("SimulationScene");
+            }
+            else
+            {
+                // Inform the user which data should be corrected.
+                errorText.gameObject.SetActive(true);
+                switch (e)
+                {
+                    case ErrorCode.SizeNotPositive:
+                        errorText.text = "Both width and height must be positive integers.";
+                        break;
+                    case ErrorCode.SizeTooBig:
+                        errorText.text = string.Format("Grid size cannot be bigger than {0}.", maxGridSize);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
+
 
     }
 
