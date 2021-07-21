@@ -17,6 +17,10 @@ public class SimulationSetup : MonoBehaviour
     // Text next to sliders that will be updated.
     public Text gridSpreadText;
     public Text frameDelayText;
+    // Help panel and help text.
+    public GameObject helpPanel;
+    public Text helpText;
+    public TextAsset helpFile;
     // A script needed to preserve the settings and create a proper grid in the new scene.
     public DataHolderScript dataHolder;
     // An enum for specific error messages.
@@ -43,11 +47,25 @@ public class SimulationSetup : MonoBehaviour
         gridSpreadText = GameObject.Find("GridSpreadValue").GetComponent<Text>();
         frameDelayText = GameObject.Find("FrameDelayValue").GetComponent<Text>();
 
+        helpPanel = GameObject.Find("HelpPanel");
+        helpText = GameObject.Find("HelpText").GetComponent<Text>();
+        // Hide help panel initially and load text from file.
+        helpPanel.SetActive(false);
+        helpText.text = helpFile.text;
+
         dataHolder = GameObject.Find("DataHolder").GetComponent<DataHolderScript>();
 
         // Immediately update slider text to remove the placeholder '8's.
         UpdateSliderTextSpread();
         UpdateSliderTextDelay();
+    }
+    public void Update()
+    {
+        if( Input.GetKeyDown("escape") )
+        {
+            // Exit the game.
+            ExitGame();
+        }
     }
     public void BeginSimulation()
     {
@@ -93,8 +111,11 @@ public class SimulationSetup : MonoBehaviour
                 }
             }
         }
+    }
 
-
+    public void ToggleHelpDisplay()
+    {
+        helpPanel.SetActive(!helpPanel.activeSelf);
     }
 
     // Make sure the grid size is positive.

@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\DataHolderScript.cs" />
     <Compile Include="Assets\Scripts\GameManagerScript.cs" />
     <Compile Include="Assets\Scripts\SimulationSetup.cs" />
+    <None Include="Assets\Resources\HelpText.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Przemek/Documents/GitHub/Game of Life/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

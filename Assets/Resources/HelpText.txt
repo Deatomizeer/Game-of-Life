@@ -1,0 +1,10 @@
+The Game of Life takes place on a grid of square cells, which can be either alive or dead. Every cell interacts with its eight neighbours. At each step in time, the following transitions occur:
+  - Any live cell with two or three live neighbours lives on to the next generation,
+  - Any live cell with less than two or more than three live neighbours dies,
+  - Any dead cell with exactly three live neighbours becomes a live cell.
+Simulation controls:
+  - ESC to exit return to main menu or close the program,
+  - SPACEBAR to pause or resume the simulation,
+  - R to reset the grid state (while paused),
+  - LMB on any cell to switch it on or off (while paused).
+Find me on Github: https://github.com/Deatomizeer
